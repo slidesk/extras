@@ -1,0 +1,4 @@
+{
+  "addSpeakerScripts": ["plugins/theater/theater.js"],
+  "onSpeakerViewSlideChange": "window.slidesk.makeTheater();"
+}
