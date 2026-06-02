@@ -1,0 +1,4 @@
+{
+  "addSpeakerScripts": ["./plugins/steps_speaker/steps_speaker.js"],
+  "onSpeakerViewSlideChange": "window.slidesk.stepsSpeaker();"
+}
