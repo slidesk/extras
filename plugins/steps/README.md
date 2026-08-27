@@ -11,3 +11,13 @@ Appearence speed can be control with an override in `custom.css` by redefining t
   --animationSteps: 100ms;
 }
 ```
+
+Each item in the list will appear step by step, with the defined animation speed.
+
+```md
+- first
+- second
+- third
+```
+
+If you want to animate your slide content step by step, something else than a list, use the https://slidesk.link/plugins#gouz__sbs plugin.
