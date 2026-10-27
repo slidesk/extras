@@ -2,7 +2,7 @@
 
 This plugin allows you to control the navigation with a keyboard.
 
-Per default, arrows left and right control next() and previous(), they can't be override.
+SliDesk already binds the arrows, Page Up / Page Down, Space, Home / End, `b` / `.` (black screen) and `f` (fullscreen). A key in your `keyboard.json` takes over the SliDesk binding of that key.
 
 You can override it with a `keyboard.json` file in the root directory of the presentation.
 
