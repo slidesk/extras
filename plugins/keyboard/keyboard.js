@@ -10,6 +10,8 @@ const fetchMapping = async () => {
       f: "fullscreen",
     };
   }
+  // the keys mapped here take over the ones SliDesk binds
+  for (const key of Object.keys(mapping)) delete window.slidesk.keys?.[key];
   document.addEventListener("keydown", (e) => {
     if (typeof window.slidesk[mapping[e.key]] !== "undefined") {
       window.slidesk[mapping[e.key]]();
