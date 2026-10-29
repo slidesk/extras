@@ -1,0 +1,7 @@
+{
+  "addSpeakerScripts": ["plugins/easylab/easylab.js"],
+  "addWS": "plugins/easylab/easylab.ws.mjs",
+  "onSpeakerViewSlideChange": "window.slidesk.easylab();",
+  "files": ["easylab.js", "easylab.ws.mjs"],
+  "tags": ["easylab", "workshop", "lab", "notification"]
+}
