@@ -1,10 +1,20 @@
 # SliDesk Plugin: steps
 
-This plugin overrides the `next()` function of slidesk to allow you to have a list which appears step by step.
+This plugin overrides the `next()` function of SliDesk so that a list appears item by item.
 
-You have to add a class `steps` on the slides which contain a list.
+Add the class `steps` on the slides which contain a list:
 
-Appearence speed can be control with an override in `custom.css` by redefining this css variable:
+```md
+## My list .[steps]
+
+- first
+- second
+- third
+```
+
+`next` shows the items one by one, then goes to the next slide. Coming back to the slide, or jumping to it, shows every item. The speaker view follows the items.
+
+The fade of each item lasts as long as the slide transition; change it in the CSS of your theme:
 
 ```css
 :root {
@@ -12,12 +22,4 @@ Appearence speed can be control with an override in `custom.css` by redefining t
 }
 ```
 
-Each item in the list will appear step by step, with the defined animation speed.
-
-```md
-- first
-- second
-- third
-```
-
-If you want to animate your slide content step by step, something else than a list, use the https://slidesk.link/plugins#gouz__sbs plugin.
+To show something else than a list step by step, use the [sbs](../sbs/README.md) plugin.

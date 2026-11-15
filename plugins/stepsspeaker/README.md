@@ -7,4 +7,4 @@ When speaker notes contain `<hr>` separators, each section becomes a navigable s
 - **ArrowRight** — advances to the next step. On the last step, sends `next` to navigate to the following slide.
 - **ArrowLeft** — goes back to the previous step. On the first step, sends `previous` to navigate to the preceding slide.
 
-The plugin registers its keydown listener in the **capture phase** and calls `stopPropagation()` to prevent the default Slidesk handler from also firing, avoiding duplicate navigation commands.
+The plugin registers its keydown listener in the **capture phase** and calls `stopPropagation()` to prevent the default Slidesk handler from also firing, avoiding duplicate navigation commands. Like SliDesk, it leaves alone a key held down, typing in a field and Cmd / Ctrl / Alt shortcuts.

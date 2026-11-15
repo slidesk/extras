@@ -11,7 +11,7 @@ This template follows this structure:
 
 [[/img]]
 
-and the rest of then content
+and the rest of the content
 ```
 
 And will render the slide like this:
@@ -19,6 +19,6 @@ And will render the slide like this:
 ```
               |
 IMG (covered) |       Title of the slide
-              | and the rest of then content
+              | and the rest of the content
               |
 ```

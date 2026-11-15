@@ -1,13 +1,11 @@
 # Plugin `number`
 
-Display the current slide page on bottom right.
+Displays the number of the current slide in the bottom right corner.
 
-Per default, the plugin will display the current slide number in the bottom right corner of the screen.
+Change its format with `PLUGIN_NUMBER_FORMAT` at the top of `slidesk.toml`, outside the `[slidesk]` section:
 
-You can change this behaviour by setting an environment variable (in `.env`) option to a different value:
-
-```
+```toml
 PLUGIN_NUMBER_FORMAT="%n/%t"
 ```
 
-`%n` is replaced with the current slide number and `%t` is replaced with total slides.
+`%n` is replaced with the number of the current slide and `%t` with the number of slides.

@@ -25,3 +25,5 @@ You can control the step number by adding a `data-sbs` attribute to your element
 <div class="step" data-sbs="1">All you want</div>
 <div class="step" data-sbs="4">Last item</div>
 ```
+
+`next` shows the steps one by one, then goes to the next slide. Coming back to the slide, or jumping to it, shows every step. The speaker view follows the steps.

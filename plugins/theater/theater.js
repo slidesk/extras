@@ -6,7 +6,9 @@ window.slidesk.makeTheater = () => {
     if (match) {
       const inBraces = match[1];
       const rest = match[2];
-      p.classList.add(inBraces);
+      // "Mr Smith" is styled with .Mr-Smith; an empty {} adds no class
+      const cls = inBraces.trim().replaceAll(/\s+/g, "-");
+      if (cls) p.classList.add(cls);
       p.innerHTML = `<small>${inBraces}:</small> ${rest}`;
     }
   }
