@@ -1,16 +1,16 @@
 ## Whoami ? .[title-top text-left]
 <div class="content">
 
-    <div class="speaker">
-        !image(speaker.png, John's photo, , , [speaker-photo])
-        <h3>John Doe</h3>
+<div class="speaker">
+!image(photo.png, John's photo, , , [speaker-photo])
+<h3>John Doe</h3>
 
-        <ul>
-            <li>Some</li>
-            <li>Things</li>
-            <li>About</li>
-            <li>Me</li>
-        </ul>
-    </div>
+<ul>
+<li>Some</li>
+<li>Things</li>
+<li>About</li>
+<li>Me</li>
+</ul>
+</div>
 </div>
 

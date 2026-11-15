@@ -1,15 +1,16 @@
 <script type="module">
     import { codeToHtml } from "https://esm.sh/shiki@3.0.0";
 
-    for await (const code of [
-        ...document.querySelectorAll("code[class^='language-']"),
-    ]) {
-        code.innerHTML = await codeToHtml(code.innerText, {
-            lang: [...code.classList]
-                .filter((c) => c.startsWith("language-"))
-                .shift()
-                .replace("language-", ""),
-            theme: window.slidesk.env.SHIKI_THEME ?? "min-light",
-        });
+    const theme = window.slidesk.env.SHIKI_THEME ?? "min-light";
+    for (const code of document.querySelectorAll("pre > code[class*='language-']")) {
+        const lang = [...code.classList]
+            .find((c) => c.startsWith("language-"))
+            .replace("language-", "");
+        try {
+            // shiki brings its own <pre>: it replaces the block
+            code.parentElement.outerHTML = await codeToHtml(code.textContent, { lang, theme });
+        } catch {
+            // a language shiki does not know (math…) keeps its block
+        }
     }
 </script>

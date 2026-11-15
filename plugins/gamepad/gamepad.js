@@ -24,13 +24,16 @@ const gameLoop = () => {
     return;
   }
 
-  const gp = gamepads[0];
+  // the pad is not always at index 0
+  const gp = [...gamepads].find(Boolean);
+  if (!gp) return;
   for (let i = 0; i < 16; i += 1) {
     if (buttonPressed(gp.buttons[i]) && mapping[i]) {
       if (typeof window.slidesk[mapping[i]] !== "undefined") {
         window.slidesk[mapping[i]]();
       } else {
-        window.slidesk.io.send(JSON.stringify({ action: mapping[i] }));
+        // an action of the speaker view; falls back to the BroadcastChannel
+        window.slidesk.sendMessage({ action: mapping[i] });
       }
     }
   }

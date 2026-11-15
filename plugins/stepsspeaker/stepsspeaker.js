@@ -3,6 +3,13 @@ let speakerStepNotes = [];
 
 const $svNotes = document.getElementById("sd-sv-notes");
 
+// as the speaker view does: the socket when open, and the channel
+const stepsSpeakerSend = (action) => {
+  if (window.slidesk.io?.readyState === WebSocket.OPEN)
+    window.slidesk.io.send(JSON.stringify({ action }));
+  window.slidesk.channel?.postMessage({ action });
+};
+
 window.slidesk.stepsSpeaker = () => {
   if ($svNotes.querySelector("hr")) {
     const html = $svNotes.innerHTML;
@@ -15,16 +22,15 @@ window.slidesk.stepsSpeaker = () => {
 };
 
 document.addEventListener("keydown", (e) => {
+  // typing, Cmd/Ctrl/Alt shortcuts and held keys are left to the speaker view
+  if (window.slidesk.ignoreKey(e) || e.repeat) return;
   if (e.key === "ArrowLeft") {
     e.preventDefault();
     e.stopPropagation();
     if (speakerStepNotes.length && speakerCurrentStep > 0) {
       $svNotes.innerHTML = speakerStepNotes[--speakerCurrentStep];
     } else {
-      window.slidesk.io?.send(JSON.stringify({ action: "previous" }));
-      if (window.slidesk.channel) {
-        window.slidesk.channel.postMessage({ action: "previous" });
-      }
+      stepsSpeakerSend("previous");
     }
   } else if (e.key === "ArrowRight") {
     e.preventDefault();
@@ -32,10 +38,7 @@ document.addEventListener("keydown", (e) => {
     if (speakerStepNotes.length && speakerCurrentStep < speakerStepNotes.length - 1) {
       $svNotes.innerHTML = speakerStepNotes[++speakerCurrentStep];
     } else {
-      window.slidesk.io?.send(JSON.stringify({ action: "next" }));
-      if (window.slidesk.channel) {
-        window.slidesk.channel.postMessage({ action: "next" });
-      }
+      stepsSpeakerSend("next");
     }
   }
 }, true);

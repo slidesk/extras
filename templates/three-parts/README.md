@@ -42,7 +42,7 @@ Left part  |  Middle part  |  Right part
 You can specify Top & Bottom parts too
 
 ```
-## Title of the slide .[#four-parts]
+## Title of the slide .[#three-parts]
 
 [[top]]
 

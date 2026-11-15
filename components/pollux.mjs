@@ -5,7 +5,10 @@
  *
  * This component displays the results page and a qrcode for your poll
  *
- * `!pollux(choice1|choice2|...)`
+ * `!pollux(choice1|choice2|...::name, multiple)`
+ *
+ * name: the poll id is kept in `window.slidesk_pollux_<name>`
+ * multiple: `true` to allow several choices (`false` by default)
  *
  * You need the plugin `@gouz/qrcode` to use it
  */
@@ -319,7 +322,7 @@ var LZString = (function () {
 
 export default async (data) => {
   let newData = data;
-  const occurences = [...newData.matchAll(/!pollux\((.*)\)/g)];
+  const occurences = [...newData.matchAll(/!pollux\(([^)]*)\)/g)];
   for await (const match of occurences) {
     const [choices, ...options] = match[1].split(",").map((a) => a.trim());
     const [choix, name] = choices.split("::").map((a) => a.trim());

@@ -13,7 +13,7 @@ const spotlightController = {
     right: false,
     bottom: false,
     left: false,
-    view: false
+    show: false
 }
 
 window.slidesk.spotlightOn = () => {
@@ -63,12 +63,15 @@ window.slidesk.spotlightShowDown = () => {
     spotlightController.show = true;
 }
 
+const spotlightHide = () => {
+    window.slidesk.spotlightOff();
+    spotlightStatus = false;
+    spotlightTimeout = null;
+};
+
 document.addEventListener('mousemove', (event) => {
     clearTimeout(spotlightTimeout);
-    spotlightTimeout = setTimeout(() => {
-        window.slidesk.spotlightOff();
-        spotlightStatus = false;
-    }, spotlightTimer);
+    spotlightTimeout = setTimeout(spotlightHide, spotlightTimer);
     spotlightStatus = true;
     window.slidesk.spotlightOn();
     window.slidesk.spotlightMove(event.clientX, event.clientY);
@@ -86,10 +89,8 @@ const spotlightLoop = () => {
         }
         window.slidesk.spotlightMove(spotlightX, spotlightY);
     }
-    else if (spotlightStatus) spotlightTimeout = setTimeout(() => {
-        window.slidesk.spotlightOff();
-        spotlightStatus = false;
-    }, spotlightTimer);
+    // one pending off-timer, not one per frame
+    else if (spotlightStatus && !spotlightTimeout) spotlightTimeout = setTimeout(spotlightHide, spotlightTimer);
     requestAnimationFrame(spotlightLoop);
 }
 requestAnimationFrame(spotlightLoop);

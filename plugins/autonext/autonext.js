@@ -1,28 +1,22 @@
+const autoClass = (slide) =>
+  [...(slide?.classList ?? [])].find((c) => c.startsWith("auto-"));
+
 window.slidesk.autonext = () => {
-  const classes = [
-    ...window.slidesk.slides[window.slidesk.currentSlide].classList,
-  ].filter((c) => c.startsWith("auto-"));
-  if (classes.length) {
-    const timer =
-      Number(classes[0].replace("auto-", "")) +
-      Number(window.slidesk.animationTimer);
+  // a stale timer of the previous auto- slide would skip one more slide
+  clearTimeout(window.slidesk.autonextTimer);
+  const auto = autoClass(window.slidesk.slides[window.slidesk.currentSlide]);
+  if (auto)
     window.slidesk.autonextTimer = setTimeout(
       () => window.slidesk.next(),
-      timer,
+      Number(auto.replace("auto-", "")) + Number(window.slidesk.animationTimer),
     );
-  } else {
-    clearTimeout(window.slidesk.autonextTimer);
-  }
 };
 
+// the speaker view has no slides: the current one is shown in #sd-sv-current
 window.slidesk.autonextNotes = () => {
-  const classes = [
-    ...window.slidesk.slides[window.slidesk.currentSlide].classList,
-  ].filter((c) => c.startsWith("auto-"));
   const current = document.querySelector("#sd-sv-current");
-  if (classes.length) {
-    current.classList.add("autonexted");
-  } else {
-    current.classList.remove("autonexted");
-  }
+  current.classList.toggle(
+    "autonexted",
+    !!autoClass(current.querySelector(".sd-slide")),
+  );
 };

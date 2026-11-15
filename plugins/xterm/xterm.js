@@ -34,10 +34,17 @@ const OPTIONS_TERM = {
   },
 };
 
+// the server routes a message to the plugin named after its directory
+window.slidesk.xtermPlugin =
+  /plugins\/([^/]+)\/xterm\.js/.exec(document.currentScript.src)?.[1] ??
+  "xterm";
+
 window.slidesk.term = null;
 
+// the server also publishes the hook's empty response: only output is written
 window.slidesk.xterm_response = (data) => {
-  if (window.slidesk.term) window.slidesk.term.write(data.data);
+  if (window.slidesk.term && typeof data.data === "string")
+    window.slidesk.term.write(data.data);
 };
 
 window.slidesk.xtemInit = () => {
@@ -49,12 +56,12 @@ window.slidesk.xtemInit = () => {
     window.slidesk.term.open(term);
     window.slidesk.term.onData((data) => {
       window.slidesk.sendMessage({
-        plugin: "@gouz__xterm",
+        plugin: window.slidesk.xtermPlugin,
         data,
       });
     });
     window.slidesk.sendMessage({
-      plugin: "@gouz__xterm",
+      plugin: window.slidesk.xtermPlugin,
       data: "clear\n",
     });
     setTimeout(() => {
@@ -62,7 +69,7 @@ window.slidesk.xtemInit = () => {
       if (init) {
         window.slidesk.term.write(init);
         window.slidesk.sendMessage({
-          plugin: "@gouz__xterm",
+          plugin: window.slidesk.xtermPlugin,
           data: init,
         });
       }

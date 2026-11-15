@@ -12,10 +12,18 @@ const fetchMapping = async () => {
   }
   // the keys mapped here take over the ones SliDesk binds
   for (const key of Object.keys(mapping)) delete window.slidesk.keys?.[key];
-  // a mapped action runs here when it exists, else it is sent to the other view
-  const run = (action) => {
-    if (typeof window.slidesk[action] !== "undefined") window.slidesk[action]();
-    else window.slidesk.io?.send(JSON.stringify({ action }));
+  // an action this view lacks goes to the other view (the speaker view has
+  // no sendMessage); fullscreen is not sent: it needs a key press on that page
+  const send = (action) => {
+    if (window.slidesk.sendMessage) return window.slidesk.sendMessage({ action });
+    if (window.slidesk.io?.readyState === WebSocket.OPEN)
+      window.slidesk.io.send(JSON.stringify({ action }));
+    window.slidesk.channel?.postMessage({ action });
+  };
+  // the X action, and the optional XDown / XUp, which are never sent
+  const run = (action, remote = false) => {
+    if (Object.hasOwn(window.slidesk, action)) window.slidesk[action]();
+    else if (remote && action !== "fullscreen") send(action);
   };
   // Cmd/Ctrl/Alt shortcuts and typing in a field are left alone
   const ignore = (e) =>
@@ -30,7 +38,7 @@ const fetchMapping = async () => {
     e.preventDefault();
     // a held key fires once, its Up comes on release
     if (e.repeat) return;
-    run(mapping[e.key]);
+    run(mapping[e.key], true);
     run(`${mapping[e.key]}Down`);
   });
   document.addEventListener("keyup", (e) => {
