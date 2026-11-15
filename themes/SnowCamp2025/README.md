@@ -8,7 +8,7 @@ Seul `default.css` est chargé quand le dossier est dans `themes/` d'un talk. Il
 
 - `.[split]` avec un `<div class="content">` qui contient des `<div>` : contenu en colonnes (largeurs libres avec `style="width: 75%"`) ;
 - `.[title-top]` : titre en haut de la slide ;
-- `.[text-left]` : texte aligné à gauche.
+- `.[text-left]` : texte aligné à gauche ;
 - `.[cover]` : slide de couverture, avec l'illustration de l'évènement ;
 - `<div class="speaker">` dans un `<div class="content">` : présentation des speakers, voir `speakers.sdf` et `speaker-single.sdf`.
 
