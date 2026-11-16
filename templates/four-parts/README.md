@@ -11,7 +11,7 @@ First part
 
 [[/one]]
 
-and the rest of then content
+and the rest of the content
 
 [[two]]
 
@@ -42,7 +42,7 @@ And will render the slide like this:
 
 First part  |  Second part  |  Third part | Fourth part
 
-               and rest of content
+               and the rest of the content
             and it can continue here
 ```
 

@@ -1,21 +1,11 @@
-const fromBinary = (encoded) => {
-  const binary = atob(encoded);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < bytes.length; i += 1) {
-    bytes[i] = binary.charCodeAt(i);
-  }
-  return String.fromCharCode(...new Uint16Array(bytes.buffer));
-};
-
 const supportsPopover = () => HTMLElement.prototype.hasOwnProperty("popover");
 
+// the core no longer keeps the markdown of a slide (data-source): its HTML is shown
 window.slidesk.changeSource = () => {
-  if (supportsPopover())
-    document.querySelector("#sd-source pre").innerText = fromBinary(
-      window.slidesk.slides[window.slidesk.currentSlide].getAttribute(
-        "data-source",
-      ),
-    );
+  if (!supportsPopover()) return;
+  const slide = window.slidesk.slides[window.slidesk.currentSlide].cloneNode(true);
+  slide.querySelectorAll(".sd-notes").forEach((n) => n.remove());
+  document.querySelector("#sd-source pre").innerText = slide.innerHTML.trim();
 };
 
 if (!supportsPopover()) {

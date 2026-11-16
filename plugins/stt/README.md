@@ -1,25 +1,24 @@
 # Speech To Text
 
-This plugin uses WebAPI Speech Recognition. It works only on Chromium-based & Safari browsers.
+This plugin uses the Web Speech API (speech recognition). It works only in Chromium-based browsers and Safari.
 
-You have to use the ssl connection to activate it.
+The page must be served over HTTPS; set it up in `slidesk.toml`:
 
-SliDesk allows https when in the `.env` file this configuration is precised.
-
-```
-KEY=./server.key
-CERT=./server.crt
+```toml
+[slidesk]
 HTTPS=true
+KEY="./server.key"
+CERT="./server.crt"
 ```
 
-To generate the two files, use this following command:
+To generate the two files:
 
 ```
 openssl req -new -x509 -nodes -days 365 -keyout server.key -out server.crt
 ```
 
-If you want to change the default language ("fr-FR"), you have to specify it in `.env` file:
+The recognition is in French (`fr-FR`) by default. Change it with `STT_LANG` at the top of `slidesk.toml`, outside the `[slidesk]` section:
 
-```
-STT_LANG="en-EN"
+```toml
+STT_LANG="en-US"
 ```

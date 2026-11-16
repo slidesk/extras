@@ -1,13 +1,13 @@
 # Shiki
 
-More information on https://shiki.style
+Highlights the code blocks with [Shiki](https://shiki.style).
 
-[WARNING] this plugin works only if you are online
+[WARNING] Shiki is fetched from esm.sh: this plugin works only online.
 
-You can change the theme using `SHIKI_THEME` variable in `.env`.
+A block in a language Shiki does not know (`math`, …) is left as it is. Do not install it with the `highlightjs` plugin.
 
-Example:
+Change the theme with `SHIKI_THEME` at the top of `slidesk.toml`, outside the `[slidesk]` section (`min-light` by default):
 
-```
-SHIKI_THEME=nord
+```toml
+SHIKI_THEME="nord"
 ```

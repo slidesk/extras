@@ -28,4 +28,4 @@ Then you can add css to stylify your dialog
 }
 ```
 
-A `<small>` html element is used to display names, then you can style it too.
+A `<small>` html element is used to display names, then you can style it too. A name with spaces, `{Mr Smith}`, gets the class `Mr-Smith`.

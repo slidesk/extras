@@ -51,7 +51,9 @@ const spawn = (args, options) => {
 
 let ptyProcess = null;
 
-export default async (message, server) => {
+export default async (message, server, socket) => {
+  // any viewer can write to the socket: only the speaker types in the shell
+  if (!socket?.canSend) return { error: "Only the speaker uses the terminal" };
   if (ptyProcess === null) {
     ptyProcess = spawn([], {
       name: "xterm-256color",
